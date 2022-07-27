@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Epic extends Task {
-    private LocalDateTime endTime;
-    protected final Map<Integer, SubTask> subTasks = new HashMap<>();
+    private final Map<Integer, SubTask> subTasks = new HashMap<>();
 
     public Epic(int id, String name, String description) {
         super(id, name, description);
@@ -15,7 +14,7 @@ public class Epic extends Task {
     public Map<Integer, SubTask> getSubTasks() {
         return subTasks;
     }
-
+    @Override
     public TaskType getType() {
         return TaskType.EPIC;
     }

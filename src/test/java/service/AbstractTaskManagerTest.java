@@ -4,6 +4,7 @@ import main.java.model.Epic;
 import main.java.model.Status;
 import main.java.model.SubTask;
 import main.java.model.Task;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import org.junit.jupiter.api.function.Executable;
@@ -232,5 +233,11 @@ abstract class AbstractTaskManagerTest<T extends TaskManager> {
                 manager.getSubTask(epic.getId(), subTaskUpdate.getId()).getName());
         assertEquals(subTaskUpdate.getDescription(),
                 manager.getSubTask(epic.getId(), subTaskUpdate.getId()).getDescription());
+    }
+
+    @AfterEach
+    void clear() {
+        manager.deleteAllTasks();
+        manager.deleteAllEpicTasks();
     }
 }

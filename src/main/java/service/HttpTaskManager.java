@@ -10,12 +10,12 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
-public class HTTPTaskManager extends FileBackedTasksManager {
+public class HttpTaskManager extends FileBackedTasksManager {
     private KVTaskClient kvTaskClient;
     private Gson gson = new Gson();
     private HistoryManager historyManager = Managers.getDefaultHistory();
 
-    public HTTPTaskManager(String url) {
+    public HttpTaskManager(String url) {
         kvTaskClient = new KVTaskClient(url);
         load();
     }

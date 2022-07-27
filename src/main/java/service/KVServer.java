@@ -48,7 +48,6 @@ public class KVServer {
         } finally {
             h.close();
         }
-        // TODO Добавьте получение значения по ключу
     }
 
     private void save(HttpExchange h) throws IOException {

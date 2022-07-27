@@ -8,13 +8,14 @@ import main.java.model.Task;
 import main.java.service.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class HttpTaskServerTest {
+public class HttpTaskServerTest extends AbstractTaskManagerTest<HttpTaskManager>{
     TaskManager taskManager = Managers.getDefault();
     KVTaskClient kvTaskClient = new KVTaskClient("http://localhost:8078");
     Gson gson = new Gson();
@@ -23,6 +24,10 @@ public class HttpTaskServerTest {
     public static void start() throws IOException {
         new KVServer().start();
         HttpTaskServer.main(new String[]{});
+    }
+    @BeforeEach
+    void init() {
+        manager = (HttpTaskManager) Managers.getDefault();
     }
 
     @Test
@@ -33,7 +38,7 @@ public class HttpTaskServerTest {
     }
 
     @Test
-    void deleteTaskTest() { // Для ревьювера: почему если назвать метод "deleteTaskTest" то
+    void deleteTaskTest() {
         Task task = taskManager.createTask("task", "description");
         int id = task.getId();
         taskManager.deleteTask(id);
@@ -95,5 +100,6 @@ public class HttpTaskServerTest {
     void clear() {
         taskManager.deleteAllTasks();
         taskManager.deleteAllEpicTasks();
+        }
     }
-}
+
